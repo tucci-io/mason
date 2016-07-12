@@ -10,6 +10,13 @@ matrix:
       env: MASON_PLATFORM=osx
     - os: linux
       sudo: false
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - libstdc++6
+          - libstdc++-5-dev
       env: MASON_PLATFORM=linux
 
 env:
