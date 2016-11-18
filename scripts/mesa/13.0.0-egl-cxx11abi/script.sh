@@ -43,7 +43,7 @@ function mason_compile {
         --enable-texture-float \
         --enable-llvm-shared-libs \
         --enable-shared-glapi \
-        --with-egl-platforms=drm \
+        --with-egl-platforms=surfaceless \
         --with-dri-drivers=swrast \
         --with-gallium-drivers=swrast \
         --with-llvm-prefix=/usr/lib/llvm-3.8 \
