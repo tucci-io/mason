@@ -35,6 +35,4 @@ script:
 - ./mason link ${MASON_NAME} ${MASON_VERSION}
 - ./test.sh
 - ./mason version ${MASON_NAME} ${MASON_VERSION}
-
-after_success:
 #- ./mason publish ${MASON_NAME} ${MASON_VERSION}

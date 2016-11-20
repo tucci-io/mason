@@ -29,6 +29,4 @@ before_install:
 script:
 - if [[ $(uname -s) == 'Darwin' ]]; then brew install cmake; fi
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
-
-after_success:
 - ./mason publish ${MASON_NAME} ${MASON_VERSION}

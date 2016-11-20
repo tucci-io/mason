@@ -23,6 +23,4 @@ script:
 - ./mason install ninja 1.7.1
 - export PATH=$(./mason prefix ninja 1.7.1)/bin:${PATH}
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
-
-after_success:
 - ./mason publish ${MASON_NAME} ${MASON_VERSION}

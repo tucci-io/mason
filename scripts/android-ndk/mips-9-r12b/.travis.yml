@@ -7,6 +7,4 @@ os:
 
 script:
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
-
-after_success:
 - ./mason publish ${MASON_NAME} ${MASON_VERSION}

@@ -51,6 +51,4 @@ script:
     export CC=gcc-5
   fi
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
-
-after_success:
 - ./mason publish ${MASON_NAME} ${MASON_VERSION}
