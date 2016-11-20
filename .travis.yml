@@ -20,4 +20,6 @@ install:
   fi
 
 script:
+- ./utils/test_builds.sh
 - ./test/all.sh
+

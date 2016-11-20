@@ -705,6 +705,14 @@ function mason_run {
             mason_build
             mason_write_config
         fi
+    elif [ "$1" == "fetch" ]; then
+        mason_load_source
+        if [[ ! -d ${MASON_BUILD_PATH} ]]; then
+            mason_error "MASON_BUILD_PATH does not exist at: '${MASON_BUILD_PATH}'"
+            exit 1
+        else
+            mason_success "Downloaded and unpacked as expected"
+        fi
     elif [ "$1" == "link" ]; then
         mason_link
     elif [ "$1" == "remove" ]; then
