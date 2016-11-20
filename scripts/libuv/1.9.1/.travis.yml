@@ -33,12 +33,6 @@ matrix:
     - os: linux
       env: MASON_PLATFORM=android MASON_ANDROID_ABI=mips-64
 
-install:
-- ./mason build ${MASON_NAME} ${MASON_VERSION}
-
-before_script:
-- ./mason publish ${MASON_NAME} ${MASON_VERSION}
-
 script:
-- ./mason remove ${MASON_NAME} ${MASON_VERSION}
-- ./mason install ${MASON_NAME} ${MASON_VERSION}
+- ./mason build ${MASON_NAME} ${MASON_VERSION}
+- ./mason publish ${MASON_NAME} ${MASON_VERSION}
