@@ -17,9 +17,7 @@ matrix:
     - os: linux
       env: MASON_PLATFORM=android MASON_ANDROID_ARCH=x86
 
-before_install:
-- if [[ $(uname -s) == 'Darwin' ]]; then brew rm freetype || true; fi
-
 script:
+- if [[ $(uname -s) == 'Darwin' ]]; then brew rm freetype || true; fi
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
 - ./mason publish ${MASON_NAME} ${MASON_VERSION}
