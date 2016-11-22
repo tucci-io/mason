@@ -20,6 +20,6 @@ install:
   fi
 
 script:
-- ./utils/test_builds.sh
+- if [[ $(uname -s) == 'Linux' ]]; then ./utils/test_builds.sh; fi
 - ./test/all.sh
 
