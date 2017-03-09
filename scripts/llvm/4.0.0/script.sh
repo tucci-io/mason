@@ -16,8 +16,8 @@ function setup_release() {
     if [[ ${BUILD_AND_LINK_LIBCXX} == true ]]; then
         get_llvm_project "http://llvm.org/git/libcxx.git"            ${MASON_BUILD_PATH}/projects/libcxx
         get_llvm_project "http://llvm.org/git/libcxxabi.git"         ${MASON_BUILD_PATH}/projects/libcxxabi
-        get_llvm_project "http://llvm.org/git/libunwind.git"         ${MASON_BUILD_PATH}/projects/libunwind
     fi
+    get_llvm_project "http://llvm.org/git/libunwind.git"         ${MASON_BUILD_PATH}/projects/libunwind
     get_llvm_project "http://llvm.org/git/lld.git"               ${MASON_BUILD_PATH}/tools/lld
     get_llvm_project "http://llvm.org/git/clang-tools-extra.git" ${MASON_BUILD_PATH}/tools/clang/tools/extra
     get_llvm_project "http://llvm.org/git/lldb.git"              ${MASON_BUILD_PATH}/tools/lldb

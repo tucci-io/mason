@@ -79,8 +79,8 @@ function setup_release() {
     if [[ ${BUILD_AND_LINK_LIBCXX} == true ]]; then
         get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/libcxx-${MASON_BASE_VERSION}.src.tar.xz"        ${MASON_BUILD_PATH}/projects/libcxx
         get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/libcxxabi-${MASON_BASE_VERSION}.src.tar.xz"     ${MASON_BUILD_PATH}/projects/libcxxabi
-        get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/libunwind-${MASON_BASE_VERSION}.src.tar.xz"     ${MASON_BUILD_PATH}/projects/libunwind
     fi
+    get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/libunwind-${MASON_BASE_VERSION}.src.tar.xz"     ${MASON_BUILD_PATH}/projects/libunwind
     get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/lld-${MASON_BASE_VERSION}.src.tar.xz"               ${MASON_BUILD_PATH}/tools/lld
     get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/clang-tools-extra-${MASON_BASE_VERSION}.src.tar.xz" ${MASON_BUILD_PATH}/tools/clang/tools/extra
     get_llvm_project "http://llvm.org/releases/${MASON_BASE_VERSION}/lldb-${MASON_BASE_VERSION}.src.tar.xz"              ${MASON_BUILD_PATH}/tools/lldb
@@ -238,13 +238,13 @@ function mason_compile {
      ${CMAKE_EXTRA_ARGS}
 
     if [[ ${BUILD_AND_LINK_LIBCXX} == true ]]; then
-        ${MASON_NINJA}/bin/ninja unwind -j${MASON_CONCURRENCY}
-
         # make libc++ and libc++abi first
         ${MASON_NINJA}/bin/ninja cxx -j${MASON_CONCURRENCY}
 
         ${MASON_NINJA}/bin/ninja lldb -j${MASON_CONCURRENCY}
     fi
+
+    ${MASON_NINJA}/bin/ninja unwind -j${MASON_CONCURRENCY}
 
     # then make everything else
     ${MASON_NINJA}/bin/ninja -j${MASON_CONCURRENCY}
