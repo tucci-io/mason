@@ -49,7 +49,11 @@ if [ ${MASON_PLATFORM} = 'osx' ]; then
             exit 1
         fi
         MASON_SDK_ROOT=${MASON_XCODE_ROOT}/Platforms/MacOSX.platform/Developer
-        MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/MacOSX${MASON_SDK_VERSION}.sdk"
+        # note: as of xcode >= 8.2 there is an unversioned "<Platform>.sdk" directory
+        # s.g. for 10.12 the `MacOSX10.12.sdk` is a symlink to `MacOSX.sdk`
+        # We use the unversioned directory here so that CFLAGS and CXXFLAGS are portable across
+        # systems that might have a different SDK (e.g. xcode 8.3 vs 8.2)
+        MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/MacOSX.sdk"
 
         if [[ ${MASON_SYSTEM_PACKAGE:-} && ${MASON_SDK_VERSION%%.*} -ge 10 && ${MASON_SDK_VERSION##*.} -ge 11 ]]; then
             export MASON_DYNLIB_SUFFIX="tbd"
@@ -79,7 +83,7 @@ elif [ ${MASON_PLATFORM} = 'ios' ]; then
         exit 1
     fi
     MASON_SDK_ROOT=${MASON_XCODE_ROOT}/Platforms/iPhoneOS.platform/Developer
-    MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/iPhoneOS${MASON_SDK_VERSION}.sdk"
+    MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/iPhoneOS.sdk"
 
     MIN_SDK_VERSION_FLAG="-miphoneos-version-min=${MASON_PLATFORM_VERSION}"
     export MASON_IOS_CFLAGS="${MIN_SDK_VERSION_FLAG} -isysroot ${MASON_SDK_PATH}"
@@ -96,7 +100,7 @@ elif [ ${MASON_PLATFORM} = 'ios' ]; then
     fi
 
     MASON_SDK_ROOT=${MASON_XCODE_ROOT}/Platforms/iPhoneSimulator.platform/Developer
-    MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/iPhoneSimulator${MASON_SDK_VERSION}.sdk"
+    MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/iPhoneSimulator.sdk"
     export MASON_ISIM_CFLAGS="${MIN_SDK_VERSION_FLAG} -isysroot ${MASON_SDK_PATH}"
 
 elif [ ${MASON_PLATFORM} = 'linux' ]; then
