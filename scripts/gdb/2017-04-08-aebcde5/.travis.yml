@@ -1,24 +1,31 @@
 language: generic
+compiler: gcc
+sudo: false
 
 matrix:
   include:
     - os: osx
-      osx_image: xcode8
-      compiler: clang
+      osx_image: xcode8.3
     - os: linux
-      sudo: false
       addons:
         apt:
           sources:
            - ubuntu-toolchain-r-test
           packages:
-           - g++-5
+           - libstdc++-5-dev
+           - g++-6
+           - bison
            - texinfo
 
 # override install to prefer g++ instead of clang++
 install:
-  - export CXX=g++-5
-  - export CC=gcc-5
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+      brew install gcc
+      brew link --overwrite gcc
+    fi
+  - export CXX=g++-6
+  - export CC=gcc-6
 
 script:
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
