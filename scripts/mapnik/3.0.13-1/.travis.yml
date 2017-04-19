@@ -11,9 +11,8 @@ matrix:
           sources:
            - ubuntu-toolchain-r-test
           packages:
-           - libstdc++-4.9-dev
+           - libstdc++-4.8-dev
            - xutils-dev
 
 script:
 - ./mason build ${MASON_NAME} ${MASON_VERSION}
-- ./mason publish ${MASON_NAME} ${MASON_VERSION}
